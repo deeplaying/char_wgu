@@ -2,6 +2,7 @@ import tensorflow as tf
 import numpy as np
 from prepare_data import CharData
 import time
+import sys
 
 # hyperparameters
 num_hidden_units = 64
@@ -31,6 +32,11 @@ def network(inp, num_classes):
 
 def main():
 
+    if (len(sys.args) > 2):
+        data_path = str(sys.args[1])
+        models_save_path = str(sys.args([2]))
+    else:
+        print("args: 1. data file \n 2. dir to save checkpoints in")
     data = CharData(data_path, batch_size, timesteps)
     num_classes = len(data.character_set)
     X = tf.placeholder(tf.float32, [None, timesteps, num_classes], name="input_data")
@@ -59,7 +65,7 @@ def main():
                     avg_cost += _cost
             avg_cost = avg_cost / ctr
             print("epoch: {0}, cost: {1}; epoch took {2} seconds".format(i, avg_cost, time.time()-last_time))
-            saver.save(sess, root_dir+'saved_weights/char_rnn', global_step=i)
+            saver.save(sess, models_save_path, global_step=i)
 
 if __name__ == "__main__":
     main()
