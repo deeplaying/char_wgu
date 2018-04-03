@@ -30,7 +30,7 @@ def network(inp, num_classes):
 
 def main():
 
-    data_path = "char_wgu/gibber"
+    data_path = "char_wgu/data"
     models_save_path = "./weights"
 
     data = CharData(data_path, batch_size, timesteps)
