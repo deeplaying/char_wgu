@@ -4,7 +4,7 @@ from prepare_data import CharData
 
 root_dir = "drive/app/char_rnn/"
 data_path = "char_wgu/gibber"
-models_save_path = "./weights"
+models_save_path = "./weights/"
 
 with tf.Session() as sess:
     saver = tf.train.import_meta_graph(models_save_path + 'char_rnn-0.meta')
