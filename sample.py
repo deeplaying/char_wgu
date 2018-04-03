@@ -3,8 +3,8 @@ import numpy as np
 from prepare_data import CharData
 
 root_dir = "drive/app/char_rnn/"
-    data_path = "char_wgu/gibber"
-    models_save_path = "./weights"
+data_path = "char_wgu/gibber"
+models_save_path = "./weights"
 
 if (len(sys.argv) > 2):
     data_path = str(data_path)
