@@ -3,6 +3,7 @@ import numpy as np
 from prepare_data import CharData
 import time
 
+# hyperparameters
 num_hidden_units = 64
 num_cells = 3
 timesteps = 10
