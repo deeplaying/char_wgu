@@ -34,7 +34,7 @@ def main():
 
     if (len(sys.argv) > 2):
         data_path = str(sys.argv[1])
-        models_save_path = str(sys.argv([2]))
+        models_save_path = str(sys.argv[2])
     else:
         print("args: 1. data file \n 2. dir to save checkpoints in")
     data = CharData(data_path, batch_size, timesteps)
