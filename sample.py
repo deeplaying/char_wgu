@@ -3,12 +3,12 @@ import numpy as np
 from prepare_data import CharData
 
 root_dir = "drive/app/char_rnn/"
-data = CharData(root_dir+'gibber', 1, 10)
-saved_models_directory = root_dir+"saved_weights/"
+    data_path = "char_wgu/gibber"
+    models_save_path = "./weights"
 
 if (len(sys.argv) > 2):
-    data_path = str(sys.argv[1])
-    saved_models_directory = str(sys.argv[2])
+    data_path = str(data_path)
+    saved_models_directory = models_save_path
 
 with tf.Session() as sess:
     saver = tf.train.import_meta_graph(saved_models_directory + 'char_rnn-0.meta')

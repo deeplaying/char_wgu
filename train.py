@@ -11,8 +11,6 @@ timesteps = 10
 temperature = 0.9
 no_epochs = 100
 batch_size = 30
-root_dir = "drive/app/char_rnn/"
-data_path = root_dir+'gibber'
 
 def network(inp, num_classes):
 
@@ -32,11 +30,9 @@ def network(inp, num_classes):
 
 def main():
 
-    if (len(sys.argv) > 2):
-        data_path = str(sys.argv[1])
-        models_save_path = str(sys.argv[2])
-    else:
-        print("args: 1. data file \n 2. dir to save checkpoints in")
+    data_path = "char_wgu/gibber"
+    models_save_path = "./weights"
+
     data = CharData(data_path, batch_size, timesteps)
     num_classes = len(data.character_set)
     X = tf.placeholder(tf.float32, [None, timesteps, num_classes], name="input_data")
