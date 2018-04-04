@@ -71,6 +71,6 @@ class CharData:
         self.cursor += self.batch_size
         return True, self.temp_0_x, self.temp_0_y
 
-    def random_seed(self, length):
+    def get_random_seed(self, length):
         start = np.random.randint(len(self.all_text) - length)
         return self.all_text[start:start+length]

@@ -56,7 +56,7 @@ def main():
                 print(ret)
                 if ret:
                     ctr += 1
-                    _cost, _ = sess.run((cost, train_step), feed_dict={X:feed_X, Y:feed_Y})
+                    _cost, _ = sess.run((cost, train_step), feed_dict=X:feed_feed_Y})
                     print(_cost)
                     avg_cost += _cost
             avg_cost = avg_cost / ctr
