@@ -90,11 +90,11 @@ def main():
         sess.run(tf.global_variables_initializer())
         saver = tf.train.Saver(max_to_keep=4)
         for i in range(no_epochs):
-            data.begin_new_epoch()
+            data.begin_new_epoch()            
+            print('Epoch: {0}'.format(i))
             progress_bar = tqdm(total=data.length_of_text-(data.length_of_text%batch_size))
             avg_cost = 0
             ctr = 0
-            print('Epoch: {0}'.format(i))
             while data._train_data_left:
                 feed_X, feed_Y = data.get_next_batch()
                 ctr += 1
@@ -103,11 +103,11 @@ def main():
                 progress_bar.update(batch_size)
             avg_cost = avg_cost / ctr
             progress_bar.update(batch_size)
+            progress_bar.close()
             print("Epoch: {0}, Cost: {1}".format(i, avg_cost))
             if i % save_every == 0:
                 saver.save(sess, os.path.join(save_dir, 'checkpoint'), global_step=i)
                 maybe_save_seed_file(save_dir, data.character_set, data.random_seed(1000))
-            progress_bar.close()
 
 if __name__ == "__main__":
     main()
