@@ -1,16 +1,24 @@
 import tensorflow as tf
 import numpy as np
 from prepare_data import CharData
-import time
-import sys
+import os
+import argparse
+from tqdm import tqdm
 
 # hyperparameters
-num_hidden_units = 64
+num_hidden_units = 128
 num_cells = 3
-timesteps = 10
-temperature = 0.9
-no_epochs = 100
-batch_size = 30
+timesteps = 50
+
+
+def maybe_save_seed_file(save_dir, character_set, seed_text):
+    seed_file_path = os.path.join(save_dir, "seed.txt")
+    print(seed_file_path)
+    if not os.path.exists(seed_file_path):
+        seed_text= seed_text + ''.join(character_set)
+        with open(seed_file_path, 'w') as f:
+            f.write(seed_text)
+
 
 def network(inp, num_classes):
 
@@ -25,15 +33,32 @@ def network(inp, num_classes):
 
     weight = tf.Variable(tf.random_normal(shape=[num_hidden_units,num_classes]))
     bias = tf.Variable(tf.random_normal(shape=[num_classes]))
-    prediction = tf.nn.sigmoid(tf.matmul(outputs[-1], weight) + bias, name="output_layer")
+    prediction = tf.nn.relu(tf.matmul(outputs[-1], weight) + bias, name="output_layer")
     return prediction
 
 def main():
+    parser = argparse.ArgumentParser(
+                        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument('--data-file', type=str, default='gibber',
+                        help='data file containing the text to train the model on')
+    parser.add_argument('--save-dir', type=str, default='saved-checkpoints',
+                        help='directory to save the trained weights')
+    parser.add_argument('--train-epochs', type=int, default=1000,
+                        help='number of epochs to run the training')
+    parser.add_argument('--save-every', type=int, default=1,
+                        help='number of epochs to wait between saving the checkpoints')
+    parser.add_argument('--batch-size', type=int, default=128,
+                        help='number of data points in a batch')
+    args = vars(parser.parse_args())
+    print(args)
 
-    data_path = "char_wgu/data"
-    models_save_path = "./weights"
-
-    data = CharData(data_path, batch_size, timesteps)
+    save_dir = args['save_dir']
+    data_file = args['data_file']
+    no_epochs = args['train_epochs']
+    save_every = args['save_every']
+    batch_size = args['batch_size']
+    
+    data = CharData(data_file, batch_size, timesteps)
     num_classes = len(data.character_set)
     X = tf.placeholder(tf.float32, [None, timesteps, num_classes], name="input_data")
     Y = tf.placeholder(tf.float32, [None, num_classes], "expected_labels")
@@ -46,20 +71,23 @@ def main():
         sess.run(tf.global_variables_initializer())
         saver = tf.train.Saver(max_to_keep=4)
         for i in range(no_epochs):
-            last_time = time.time()
-            print(i)
-            ret = True
+            data.begin_new_epoch()
+            progress_bar = tqdm(total=data.length_of_text)
             avg_cost = 0
             ctr = 0
-            while ret:
-                ret, feed_X, feed_Y = data.get_next_batch()
-                if ret:
-                    ctr += 1
-                    _cost, _ = sess.run((cost, train_step), feed_dict={X:feed_X, Y:feed_Y})
-                    avg_cost += _cost
+            print('Epoch: {0}'.format(i))
+            while data._train_data_left:
+                feed_X, feed_Y = data.get_next_batch()
+                ctr += 1
+                _cost, _ = sess.run((cost, train_step), feed_dict={X:feed_X, Y:feed_Y})
+                avg_cost += _cost
             avg_cost = avg_cost / ctr
-            print("epoch: {0}, cost: {1}; epoch took {2} seconds".format(i, avg_cost, time.time()-last_time))
-            saver.save(sess, models_save_path, global_step=i)
+            print("Epoch: {0}, Cost: {1}".format(i, avg_cost))
+            if i % save_every == 0:
+                saver.save(sess, os.path.join(save_dir, 'checkpoint'), global_step=i)
+                maybe_save_seed_file(save_dir, data.character_set, data.random_seed(20))
+            progress_bar.close()
 
 if __name__ == "__main__":
     main()
+
