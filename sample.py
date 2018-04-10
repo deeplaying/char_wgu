@@ -31,7 +31,7 @@ from tqdm import tqdm
 
 def sample(sample_type, prediction, temperature=0.9):
     
-    if sampling_type==0:
+    if sample_type==0:
         return np.argmax(prediction)
     else:
         sample_exp = np.exp(prediction) / temperature
