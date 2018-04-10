@@ -71,7 +71,7 @@ def main():
                         help='timesteps to unravel the graph')
     parser.add_argument('--sampling-type', type=int, default=1,
                         help='sampling type, 0-argmax, 1-exponential')
-    parser.add_argument('--temperature', type=float, defalut=0.9,
+    parser.add_argument('--temperature', type=float, default=0.9,
                         help='temperature for exponential sampling. between 0 & 1')    
     args = vars(parser.parse_args())
 
