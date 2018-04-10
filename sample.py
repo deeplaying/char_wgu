@@ -97,7 +97,7 @@ def main():
             for i in range(sample_size):
                 text_input = vectorize(all_text[-timesteps:], character_set)
                 out_vec = sess.run(op_to_restore, feed_dict={input_ph:text_input})[0]
-                sampled_output = sample_function(sampling_type, out_vec, temperature=0.9)
+                sampled_output = sample(sampling_type, out_vec, temperature=0.9)
                 all_text = all_text + character_set[sampled_output]
                 pb.update(i)
         print(all_text)

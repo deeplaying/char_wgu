@@ -106,7 +106,7 @@ def main():
             print("Epoch: {0}, Cost: {1}".format(i, avg_cost))
             if i % save_every == 0:
                 saver.save(sess, os.path.join(save_dir, 'checkpoint'), global_step=i)
-                maybe_save_seed_file(save_dir, data.character_set, data.random_seed(20))
+                maybe_save_seed_file(save_dir, data.character_set, data.random_seed(1000))
             progress_bar.close()
 
 if __name__ == "__main__":
