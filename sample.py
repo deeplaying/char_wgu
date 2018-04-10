@@ -93,6 +93,7 @@ def main():
         input_ph = tf.get_default_graph().get_tensor_by_name('input_data:0')
         op_to_restore = tf.get_default_graph().get_tensor_by_name("output_layer:0")
         all_text = random_initialization[:]
+        # todo fix this weird progress bar
         with tqdm(total=sample_size) as pb:
             for i in range(sample_size):
                 text_input = vectorize(all_text[-timesteps:], character_set)
