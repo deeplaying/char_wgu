@@ -67,7 +67,6 @@ class CharData:
                     )
                 )
             )
-        print(self.cursor)
         self.cursor += self.batch_size
         if self.cursor > (len(self.all_text)-self.batch_size-self.num_timesteps):
             self._train_data_left = False

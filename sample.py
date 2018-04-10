@@ -6,13 +6,18 @@ import tensorflow as tf
 from prepare_data import CharData
 import numpy as np
 import pickle
+from tqdm import tqdm
 
 
-def sample(prediction, temperature=0.9):
-    sample_exp = np.exp(prediction) / temperature
-    sample_reduce_mean = sample_exp / np.sum(sample_exp)
-    prediction_real = np.random.choice(range(len(prediction)), 1, p=sample_reduce_mean)
-    return prediction_real[0]
+def sample(sample_type, prediction, temperature=0.9):
+    
+    if sampling_type==0:
+        return np.argmax(prediction)
+    else:
+        sample_exp = np.exp(prediction) / temperature
+        sample_reduce_mean = sample_exp / np.sum(sample_exp)
+        prediction_real = np.random.choice(range(len(prediction)), 1, p=sample_reduce_mean)
+        return prediction_real[0]
 
 
 def get_meta_file_path(save_dir):
@@ -44,10 +49,18 @@ def main():
                         help='number of character to sample')
     parser.add_argument('--timesteps', type=int, default=50,
                         help='timesteps to unravel the graph')
+    parser.add_argument('--sampling-type', type=int, default=1,
+                        help='sampling type, 0-argmax, 1-exponential')
+    parser.add_argument('--temperature', type=float, defalut=0.9,
+                        help='temperature for exponential sampling. between 0 & 1')    
     args = vars(parser.parse_args())
+
     save_dir = args['save_dir']
     sample_size = args['n']
     timesteps = args['timesteps']
+    sampling_type = args['sampling_type']
+    temperature = args['temperature']
+
     checkpoint_file = tf.train.latest_checkpoint(save_dir)
     meta_file = get_meta_file_path(save_dir)
     seed_file = os.path.join(save_dir, 'seed.txt')
@@ -60,11 +73,13 @@ def main():
         input_ph = tf.get_default_graph().get_tensor_by_name('input_data:0')
         op_to_restore = tf.get_default_graph().get_tensor_by_name("output_layer:0")
         all_text = random_initialization[:]
-        for i in range(sample_size):
-            text_input = vectorize(all_text[-timesteps:], character_set)
-            out_vec = sess.run(op_to_restore, feed_dict={input_ph:text_input})[0]
-            sampled_output = sample(out_vec, temperature=0.9)
-            all_text = all_text + character_set[sampled_output]
+        with tqdm(total=sample_size) as pb:
+            for i in range(sample_size):
+                text_input = vectorize(all_text[-timesteps:], character_set)
+                out_vec = sess.run(op_to_restore, feed_dict={input_ph:text_input})[0]
+                sampled_output = sample_function(sampling_type, out_vec, temperature=0.9)
+                all_text = all_text + character_set[sampled_output]
+                pb.update(i)
         print(all_text)
 
 

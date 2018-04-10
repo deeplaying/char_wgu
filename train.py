@@ -23,8 +23,6 @@ def maybe_save_seed_file(save_dir, character_set, seed_text):
 def network(inp, num_classes):
 
     inp = tf.unstack(inp, timesteps, axis=1)
-    print(inp)
-
     cells = []
     for _ in range(3):
         cells.append(tf.nn.rnn_cell.BasicLSTMCell(num_hidden_units))
@@ -72,7 +70,7 @@ def main():
         saver = tf.train.Saver(max_to_keep=4)
         for i in range(no_epochs):
             data.begin_new_epoch()
-            progress_bar = tqdm(total=data.length_of_text)
+            progress_bar = tqdm(total=data.length_of_text-(data.length_of_text%batch_size))
             avg_cost = 0
             ctr = 0
             print('Epoch: {0}'.format(i))
@@ -81,7 +79,9 @@ def main():
                 ctr += 1
                 _cost, _ = sess.run((cost, train_step), feed_dict={X:feed_X, Y:feed_Y})
                 avg_cost += _cost
+                progress_bar.update(batch_size)
             avg_cost = avg_cost / ctr
+            progress_bar.update(batch_size)
             print("Epoch: {0}, Cost: {1}".format(i, avg_cost))
             if i % save_every == 0:
                 saver.save(sess, os.path.join(save_dir, 'checkpoint'), global_step=i)
@@ -90,4 +90,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
