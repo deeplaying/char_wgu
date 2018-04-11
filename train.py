@@ -82,7 +82,7 @@ def main():
     save_every = args['save_every']
     batch_size = args['batch_size']
     _to_retrain = bool(args['retrain'])
-    meta_file = args['meta-file']
+    meta_file = args['meta_file']
     
     data = CharData(data_file, batch_size, timesteps)
     num_classes = len(data.character_set)
