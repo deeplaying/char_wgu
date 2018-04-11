@@ -38,11 +38,11 @@ def maybe_save_seed_file(save_dir, character_set, seed_text):
     if not os.path.exists(seed_file_path):
         seed_text= seed_text + ''.join(character_set)
         with open(seed_file_path, 'w') as f:
+            print('Saving seed file to ', seed_file_path)
             f.write(seed_text)
 
 
 def network(inp, num_classes):
-
     inp = tf.unstack(inp, timesteps, axis=1)
     cells = []
     for _ in range(3):
@@ -54,6 +54,7 @@ def network(inp, num_classes):
     bias = tf.Variable(tf.random_normal(shape=[num_classes]))
     prediction = tf.nn.relu(tf.matmul(outputs[-1], weight) + bias, name="output_layer")
     return prediction
+
 
 def main():
     parser = argparse.ArgumentParser(
@@ -68,6 +69,10 @@ def main():
                         help='number of epochs to wait between saving the checkpoints')
     parser.add_argument('--batch-size', type=int, default=128,
                         help='number of data points in a batch')
+    parser.add_argument('--retrain', type=int, default=0,
+                        help='0 to train fresh, 1 to retrain from save-dir')
+    parser.add_argument('--meta-file', type=str, default='',
+                        help='0 to train fresh, 1 to retrain from save-dir')
     args = vars(parser.parse_args())
     print(args)
 
@@ -76,6 +81,8 @@ def main():
     no_epochs = args['train_epochs']
     save_every = args['save_every']
     batch_size = args['batch_size']
+    _to_retrain = bool(args['retrain'])
+    meta_file = args['meta-file']
     
     data = CharData(data_file, batch_size, timesteps)
     num_classes = len(data.character_set)
@@ -87,8 +94,13 @@ def main():
     train_step = tf.train.AdamOptimizer(0.01).minimize(cost)
 
     with tf.Session() as sess:
-        sess.run(tf.global_variables_initializer())
         saver = tf.train.Saver(max_to_keep=4)
+        if _to_retrain:
+            checkpoint_file = tf.train.latest_checkpoint(save_dir)
+            saver.restore(sess, checkpoint_file)
+            print("Training with weights from ", checkpoint_file)
+        else:
+            sess.run(tf.global_variables_initializer())
         for i in range(no_epochs):
             data.begin_new_epoch()            
             print('Epoch: {0}'.format(i))
@@ -107,6 +119,7 @@ def main():
             print("Epoch: {0}, Cost: {1}".format(i, avg_cost))
             if i % save_every == 0:
                 saver.save(sess, os.path.join(save_dir, 'checkpoint'), global_step=i)
+                print('Saved checkpoint')
                 maybe_save_seed_file(save_dir, data.character_set, data.random_seed(1000))
 
 if __name__ == "__main__":

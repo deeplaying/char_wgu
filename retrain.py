@@ -81,7 +81,7 @@ def main():
     no_epochs = args['train_epochs']
     save_every = args['save_every']
     batch_size = args['batch_size']
-    _to_retrain = bool(args['retrain']
+    _to_retrain = bool(args['retrain'])
     meta_file = args['meta_file']
     
     data = CharData(data_file, batch_size, timesteps)
@@ -97,7 +97,6 @@ def main():
         saver = tf.train.Saver(max_to_keep=4)
         if _to_retrain:
             checkpoint_file = tf.train.latest_checkpoint(save_dir)
-            saver = tf.train.Saver()
             saver.restore(sess, checkpoint_file)
             print("Training with weights from ", checkpoint_file)
         else :
