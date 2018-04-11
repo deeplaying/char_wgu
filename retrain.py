@@ -43,7 +43,6 @@ def maybe_save_seed_file(save_dir, character_set, seed_text):
 
 
 def network(inp, num_classes):
-
     inp = tf.unstack(inp, timesteps, axis=1)
     cells = []
     for _ in range(3):
