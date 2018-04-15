@@ -71,8 +71,10 @@ def main():
                         help='number of data points in a batch')
     parser.add_argument('--retrain', type=int, default=0,
                         help='0 to train fresh, 1 to retrain from save-dir')
-    parser.add_argument('--meta-file', type=str, default='',
-                        help='0 to train fresh, 1 to retrain from save-dir')
+    parser.add_argument('--save-to-drive', type=int, default=0,
+                        help='save to drive or not, 1 if yes')
+    parser.add_argument('--drive-path', type=str, default='',
+                        help='path at which google drive is mounted')    
     args = vars(parser.parse_args())
     print(args)
 
@@ -82,7 +84,8 @@ def main():
     save_every = args['save_every']
     batch_size = args['batch_size']
     _to_retrain = bool(args['retrain'])
-    meta_file = args['meta_file']
+    save_to_drive = bool(args['save_to_drive'])
+    drive_path = args['drive_path']
     
     data = CharData(data_file, batch_size, timesteps)
     num_classes = len(data.character_set)
@@ -119,6 +122,8 @@ def main():
             print("Epoch: {0}, Cost: {1}".format(i, avg_cost))
             if i % save_every == 0:
                 saver.save(sess, os.path.join(save_dir, 'checkpoint'), global_step=i)
+                if save_to_drive:
+                    saver.save(sess, os.path.join(drive_path, 'checkpoint'), global_step=i)
                 print('Saved checkpoint')
                 maybe_save_seed_file(save_dir, data.character_set, data.random_seed(1000))
 
