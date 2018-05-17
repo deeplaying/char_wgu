@@ -45,7 +45,7 @@ def maybe_save_seed_file(save_dir, character_set, seed_text):
 def network(inp, num_classes):
     inp = tf.unstack(inp, timesteps, axis=1)
     cells = []
-    for _ in range(3):
+    for _ in range(num_cells):
         cells.append(tf.nn.rnn_cell.BasicLSTMCell(num_hidden_units))
     lstm_cell = tf.nn.rnn_cell.MultiRNNCell(cells)
     outputs, states = tf.nn.static_rnn(lstm_cell, inp, dtype=tf.float32)
