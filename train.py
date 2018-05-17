@@ -75,6 +75,8 @@ def main():
                         help='save to drive or not, 1 if yes')
     parser.add_argument('--drive-path', type=str, default='',
                         help='path at which google drive is mounted')    
+    parser.add_argument('--learning-rate', type=float, default=10e-3,
+                        help='learning rate at which to update the network')    
     args = vars(parser.parse_args())
     print(args)
 
@@ -86,6 +88,7 @@ def main():
     _to_retrain = bool(args['retrain'])
     save_to_drive = bool(args['save_to_drive'])
     drive_path = args['drive_path']
+    learning_rate = args['learning_rate']
     
     data = CharData(data_file, batch_size, timesteps)
     num_classes = len(data.character_set)
@@ -94,7 +97,7 @@ def main():
     graph = network(X, num_classes)
 
     cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=graph, labels=Y))
-    train_step = tf.train.AdamOptimizer(0.01).minimize(cost)
+    train_step = tf.train.AdamOptimizer(learning_rate).minimize(cost)
 
     with tf.Session() as sess:
         saver = tf.train.Saver(max_to_keep=4)

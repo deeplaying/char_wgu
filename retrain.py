@@ -55,7 +55,6 @@ def network(inp, num_classes):
     prediction = tf.nn.relu(tf.matmul(outputs[-1], weight) + bias, name="output_layer")
     return prediction
 
-
 def main():
     parser = argparse.ArgumentParser(
                         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -116,7 +115,7 @@ def main():
             avg_cost = avg_cost / ctr
             progress_bar.update(batch_size)
             progress_bar.close()
-            print("Epoch: {0}, Cost: {1}".format(i, avg_cost))
+            print("Epoch: {0}, Loss: {1}".format(i, avg_cost))
             if i % save_every == 0:
                 saver.save(sess, os.path.join(save_dir, 'checkpoint'), global_step=i)
                 print('Saved checkpoint')
