@@ -96,8 +96,8 @@ def main():
     Y = tf.placeholder(tf.float32, [None, num_classes], "expected_labels")
     graph = network(X, num_classes)
 
-    cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=graph, labels=Y))
-    train_step = tf.train.AdamOptimizer(learning_rate).minimize(cost)
+    loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=graph, labels=Y))
+    train_step = tf.train.AdamOptimizer(learning_rate).minimize(loss)
 
     with tf.Session() as sess:
         saver = tf.train.Saver(max_to_keep=4)
@@ -116,7 +116,7 @@ def main():
             while data._train_data_left:
                 feed_X, feed_Y = data.get_next_batch()
                 ctr += 1
-                _cost, _ = sess.run((cost, train_step), feed_dict={X:feed_X, Y:feed_Y})
+                _cost, _ = sess.run((loss, train_step), feed_dict={X:feed_X, Y:feed_Y})
                 avg_cost += _cost
                 progress_bar.update(batch_size)
             avg_cost = avg_cost / ctr
