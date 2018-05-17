@@ -75,8 +75,6 @@ class CharData:
 
     def random_seed(self, length):
         start = np.random.randint(len(self.all_text) - length)
-        print('start', start)
-        print('end', start+length)
         return self.all_text[start:start+length]
 
 
