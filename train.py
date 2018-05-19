@@ -25,6 +25,7 @@ from prepare_data import CharData
 import os
 import argparse
 from tqdm import tqdm
+from model import SimpleLSTMNetwork
 
 # hyperparameters
 num_hidden_units = 128
@@ -40,20 +41,6 @@ def maybe_save_seed_file(save_dir, character_set, seed_text):
         with open(seed_file_path, 'w') as f:
             print('Saving seed file to ', seed_file_path)
             f.write(seed_text)
-
-
-def network(inp, num_classes):
-    inp = tf.unstack(inp, timesteps, axis=1)
-    cells = []
-    for _ in range(num_cells):
-        cells.append(tf.nn.rnn_cell.BasicLSTMCell(num_hidden_units))
-    lstm_cell = tf.nn.rnn_cell.MultiRNNCell(cells)
-    outputs, states = tf.nn.static_rnn(lstm_cell, inp, dtype=tf.float32)
-
-    weight = tf.Variable(tf.random_normal(shape=[num_hidden_units,num_classes]))
-    bias = tf.Variable(tf.random_normal(shape=[num_classes]))
-    prediction = tf.nn.relu(tf.matmul(outputs[-1], weight) + bias, name="output_layer")
-    return prediction
 
 
 def main():
@@ -78,8 +65,7 @@ def main():
     parser.add_argument('--learning-rate', type=float, default=10e-3,
                         help='learning rate at which to update the network')    
     args = vars(parser.parse_args())
-    print(args)
-
+    print('Using the following args: ', args)
     save_dir = args['save_dir']
     data_file = args['data_file']
     no_epochs = args['train_epochs']
@@ -89,12 +75,14 @@ def main():
     save_to_drive = bool(args['save_to_drive'])
     drive_path = args['drive_path']
     learning_rate = args['learning_rate']
-    
+
+    #build our model and set our placeholders and data
     data = CharData(data_file, batch_size, timesteps)
     num_classes = len(data.character_set)
     X = tf.placeholder(tf.float32, [None, timesteps, num_classes], name="input_data")
-    Y = tf.placeholder(tf.float32, [None, num_classes], "expected_labels")
-    graph = network(X, num_classes)
+    Y = tf.placeholder(tf.float32, [None, num_classes], name="expected_labels")
+    graph, states = SimpleLSTMNetwork(X, num_classes, timesteps, num_cells, num_hidden_units)
+    print(graph)
 
     loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=graph, labels=Y))
     train_step = tf.train.AdamOptimizer(learning_rate).minimize(loss)

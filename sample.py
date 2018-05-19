@@ -86,13 +86,12 @@ def main():
     seed_file = os.path.join(save_dir, 'seed.txt')
     seed_data = CharData(seed_file, 1, 10)
     character_set = seed_data.character_set
-    random_initialization = seed_data.random_seed(timesteps)
+    all_text = seed_data.random_seed(timesteps)
     with tf.Session() as sess:
         saver = tf.train.import_meta_graph(meta_file)
         saver.restore(sess, checkpoint_file)
         input_ph = tf.get_default_graph().get_tensor_by_name('input_data:0')
         op_to_restore = tf.get_default_graph().get_tensor_by_name("output_layer:0")
-        all_text = random_initialization[:]
         # todo fix this weird progress bar
         with tqdm(total=sample_size) as pb:
             for i in range(sample_size):

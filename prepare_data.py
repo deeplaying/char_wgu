@@ -33,6 +33,7 @@ class CharData:
 
         with open(datafile_path, 'r') as f:
             self.all_text = f.read()
+            all_text.encode('utf-8').strip()
         self.character_set = sorted(list(set(self.all_text)))
         self.length_of_text = len(self.all_text)
         print("data", datafile_path)
