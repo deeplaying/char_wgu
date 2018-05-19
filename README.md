@@ -9,7 +9,7 @@ This project draws its inspirations from Andrej Karpathy's phenomenal post, [The
 After not-very-long training on [Google Colaboratory](https://colab.research.google.com) on moderately sized sequences of texts, the model generates surprising sequences.
 Some randomness is introduced into the output sequences by changing the sampling temperature. See samply.py for mode details.
 
-* I trained a model on the text of the Constitution of Nepal 2072BS. The text was relatively small (about 200k characters) and the model was trained for 20 epochs, which took about 130 seconds per epoch. 
+* I trained a model on the text of the Constitution of Nepal 2072BS. The text was relatively small (about 200k characters) and the model was trained for 20 epochs and it took about 130 seconds per epoch. 
 
 ```
 ﻿ योग्यता नभएमा वा नरहेमा,
@@ -52,7 +52,16 @@ Some randomness is introduced into the output sequences by changing the sampling
 (य) यो संवि५इ अन्य द्योषलाथा व्यवस्थापिकाईमा पाँचन गरेको जनसभामा नेपालका नागरिक धर्म, घ्राज्या्रझ्न आवश्यक पर्ने
 ```
 
-I really like how the model decides to declare a state of emergency at {1}. The model seems to have learnt to use lists in no particular order. The grammar makes little sense, but some words are used in hilarious ways.
+*I really like how the model decides to declare a state of emergency at {1}.* The model seems to have learnt to use lists in no particular order. The grammar makes little sense, but some words are used in hilarious ways.
+
+* Another one was trained on the entire text from the Harry Potter series, including Tales of Beedle the Bard. 
+
+```
+Tt launched a new attack on Harry. “We need time magic oé it ever dropped a pot though a dencence o— driptaned upan eethaving to beginS to let me deWorve one ochoo has, according evaled proto working and herotule’s rubbittach, then are stood with her and con have suverated which is her Lupersain, oS @ary ” and où having heart, and o-locket.  suverouted to verd admit me between oeths Eingucant none! … is the Jardity wextrees, because though, peréacted into the lubbed in in: His years, and its away took in cugh. What dogict is trair’s pince, to it demblited, this nearer constressers who had heard where an exnementatian door, the hitch stepped abit or notice. 1ß“Who becalled a mack to tell it has also © babbitty Qubrerol once’s ready.
+[Okan!” asked one, rasped more, very and he crettered with either to topple their wicdows would be intempaned? Sir to be times more years,” said Year. “Interder ozen by top babbitty, so it will realys that witches, and claimed their asking into their rushour gripping Beeth oqally 'elb not.
+```
+
+This one is an intersting soup. There is a ß, a © and an @ in there. We won't replace JK Rowling anytime soon, that's for sure. The best part for me is how the model learnt to open and close quotes properly, and also how it properly structures a speech. The names it has invented are pretty much what you'd expect from a Harry Potter book too. 
 
 * More examples coming pretty soon. Lemme get through my exams first.
 
