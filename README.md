@@ -57,8 +57,16 @@ Some randomness is introduced into the output sequences by changing the sampling
 * Another one was trained on the entire text from the Harry Potter series, including Tales of Beedle the Bard. 
 
 ```
-Tt launched a new attack on Harry. “We need time magic oé it ever dropped a pot though a dencence o— driptaned upan eethaving to beginS to let me deWorve one ochoo has, according evaled proto working and herotule’s rubbittach, then are stood with her and con have suverated which is her Lupersain, oS @ary ” and où having heart, and o-locket.  suverouted to verd admit me between oeths Eingucant none! … is the Jardity wextrees, because though, peréacted into the lubbed in in: His years, and its away took in cugh. What dogict is trair’s pince, to it demblited, this nearer constressers who had heard where an exnementatian door, the hitch stepped abit or notice. 1ß“Who becalled a mack to tell it has also © babbitty Qubrerol once’s ready.
-[Okan!” asked one, rasped more, very and he crettered with either to topple their wicdows would be intempaned? Sir to be times more years,” said Year. “Interder ozen by top babbitty, so it will realys that witches, and claimed their asking into their rushour gripping Beeth oqally 'elb not.
+Tt launched a new attack on Harry. “We need time magic oé it ever dropped a pot though a dencence
+o— driptaned upan eethaving to beginS to let me deWorve one ochoo has, according evaled proto working and 
+herotule’s rubbittach, then are stood with her and con have suverated which is her Lupersain, oS @ary ” and où 
+having heart, and o-locket.  suverouted to verd admit me between oeths Eingucant none! … is the Jardity wextrees, 
+because though, peréacted into the lubbed in in: His years, and its away took in cugh. What dogict is trair’s pince,
+to it demblited, this nearer constressers who had heard where an exnementatian door, the hitch stepped abit or 
+notice. 1ß“Who becalled a mack to tell it has also © babbitty Qubrerol once’s ready.
+[Okan!” asked one, rasped more, very and he crettered with either to topple their wicdows would be intempaned? Sir 
+to be times more years,” said Year. “Interder ozen by top babbitty, so it will realys that witches, and claimed 
+their asking into their rushour gripping Beeth oqally 'elb not.
 ```
 This one is an intersting soup. We won't replace JK Rowling anytime soon, that's for sure. 
 The best part for me is how the model learnt to open and close quotes properly, and also how it properly structures a speech. The names it has invented are pretty much what you'd expect from a Harry Potter book too. 
