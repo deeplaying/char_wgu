@@ -63,6 +63,72 @@ Tt launched a new attack on Harry. “We need time magic oé it ever dropped a p
 
 This one is an intersting soup. There is a ß, a © and an @ in there. We won't replace JK Rowling anytime soon, that's for sure. The best part for me is how the model learnt to open and close quotes properly, and also how it properly structures a speech. The names it has invented are pretty much what you'd expect from a Harry Potter book too. 
 
+* This one is from a model trained on all of Arthur C Doyle's works. The grammar is pretty decent in this one, and the model seems to have created some adjectives of its own.
+
+```
+"You make it."
+  "I am so acted clearly. What he bit indeed we should not really with break
+n A°ricloon. Hulp, for me the medy certainly he give a affairs, sir. It would raid a man as mard of accused for
+  the sout ssinstor and his bedue (worn of *uner humbrelow and alonoly with. I was alone witwin
+  patient. There is a short relien. It can relet it
+  of pulsir; and there has no-eflar over, heard there
+ sonent undid you shall you, the dig of this profer each the centre of them," said Holmes.
+  "What havea; we more beare accounted," said Holmes as he
+  serely to make a spart, retulling. I can stirling that passing
+  police is could note arrive itself, but I in then, to two remarkable
+  way. There was sucking a xo; looking up of the Bellammeshe with a
+  menyes, that he am alsoing in the breating of comes of him."
+ "It was aborting that the diSlenntoan of matter in a reach to vice that. He was
+  to had hands an obare only pretured to monet each. You should seem in their true, I we seathed the öebroCing face would sat that
+  so. The man maid for his redner and little to the mood. He will," said Holmes.
+I His business. "It was weàtly glace to black the soar7.
+  "ished the mircal tave any indighting of an ipper with easiligins out of rightman to me. Syve cleor a sake of there is
+  before do left for the ½egson of lich--and the truthor, &' xing the leaveîon Ambers
+  had a nigon by the retuln0ment. . What can he thank that to mile the liar
+  than came the man.
+  "Sir You was one, and that was our crely which rad disentry arrese than the
+  oldrang one wants are to emper this man were sance. That
+  sire thisvy immediate waves en5m, whisper[some to go them."
+  "Theret arouse, Mr. Holmes. It was the now, Watson and seems one
+  with our edderly his case and trying.
+  "But with the slaw weals immastened that how somethings.
+  I was missing on his resuld so."
+  "Whenots all, traiting what he had a day brown poess. But indackun
+  yet me, he far some surfig° and his fistacthor at left.
+  "Perhaps confidence a path and with his goodwiman gards flocked upon
+  us misten with Dragons creasully at twenty, and askeded
+  the cleartenges, singonly wetarned. "It was the terrible
+  Jragerz'st confidences as
+  great dortened. There are knows pothes° before I don't not be a min*t you wire it
+  was a more note! What dangings on the door.
+  "It wretter dreadful eyes my upon to your resull in that eKpler. He were
+  not be aware an an7inger and the poor door openuces Condey of the both. Sir
+  man impossible it would not amart adPressan.
+  Mr. When. I will nevere indessanal was to the dark loom, he
+  wetered the had had tried over eleven with his wife of
+  her hand o4tile whom wident cleft once will time so turn
+  of kircobin told my tall, and they he had been asGood for
+  a warn and strange great compenitwish which ome little blittleress ?o
+  panting out this firir of an tetting down--with ask
+  satisforent, the estander engless was raccural note."
+  "Yes,- his endward for a constancy for ghesses, and in they
+  was heavy seen to ancuon. The one of the telegrope
+  caseing ancing susge of Kan-card then some dispositiver you, Mr. he
+  ray was criem with the claw clie which others half and an
+  this sense-hard piech true look one instets as he
+  were suddenly creet in a vicaurars, and Zo could all the
+  flow more man sures ; to puft interry of yourselves."
+  "Let you thought we thinks at ourselves has justly a firmlance."
+  Let a boller plenged out upon which fell over. But his troom's mose time sinosal
+  bright brick and more."
+  "I moved at the listation.
+  'I saw the cloching nation for the reupuninstlon5s for an particular-bock
+  that I am not really the man the hand, so huloped minnisy
+  rood as Beritson. As in the ancient he master itself a
+  wortys and this mernicas' may the dread my immersion Kest it.
+  "Well, sir no epime
+```
+
 * More examples coming pretty soon. Lemme get through my exams first.
 
 
