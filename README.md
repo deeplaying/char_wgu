@@ -2,7 +2,7 @@
 
 *char_wgu* is a minimal character level LSTM/RNN model that learns from sequences of text from a given file and generates text sequences based off of what is has learnt from the input text.
 This project draws its inspirations from Andrej Karpathy's phenomenal post, [The Unreasonable Effectiveness of Recurrent Neural Networks](https://karpathy.github.io/2015/05/21/rnn-effectiveness/). 
-*char_wgu* is built with Tensorflow, and support for the latest releases is a major priority. 
+*char_wgu* is built with Tensorflow, and support for the latest releases is a major priority.
 
 
 ## Samples generated with char_wgu
@@ -18,7 +18,8 @@ Some randomness is introduced into the output sequences by changing the sampling
 ह्यापा. आध्यक्ष महिला हितसण्¥य रहनेछनरू तरीका ङ
 
 ९ठ कुनआले संख्या सचघ्न ता प्रकारको आैिसऋ” भन्नात्त वा नि२प्ति र चार४ हुने निर्वाचन परिव५–को त्यस्तो संवठ्ठापन संघीय संस।ले सख्यार
-ठढडण्ण्ष्त ृण्ण्स्ण्ट, ज्ञद्दण्घढ।घढष्तरके                                                                                                                                                 
+ठढडण्ण्ष्त ृण्ण्स्ण्ट, ज्ञद्दण्घढ।घढष्तरके
+
 ेवानिवृत्त भएपछि कुनै पनि अड्डा अदालतमा बहस पैरवी,
 मेलीले अलााकरताश्त्तट व्या९, लगानी, अड्डिले आय अनुखक, अत्या। निर्मावसरको पढप. गर्नु पर्नेछ ।
 भग–२
@@ -52,7 +53,7 @@ Some randomness is introduced into the output sequences by changing the sampling
 (य) यो संवि५इ अन्य द्योषलाथा व्यवस्थापिकाईमा पाँचन गरेको जनसभामा नेपालका नागरिक धर्म, घ्राज्या्रझ्न आवश्यक पर्ने
 ```
 
-*I really like how the model decides to declare a state of emergency at {1}.* The model seems to have learnt to use lists in no particular order. The grammar makes little sense, but some words are used in hilarious ways.
+I really like how the model decides to declare a state of emergency at {1}. The model seems to have learnt to use lists in no particular order. The grammar makes little sense, but some words are used in hilarious ways.
 
 * Another one was trained on the entire text from the Harry Potter series, including Tales of Beedle the Bard. 
 
