@@ -52,13 +52,14 @@ Some randomness is introduced into the output sequences by changing the sampling
 (य) यो संवि५इ अन्य द्योषलाथा व्यवस्थापिकाईमा पाँचन गरेको जनसभामा नेपालका नागरिक धर्म, घ्राज्या्रझ्न आवश्यक पर्ने
 ```
 
-I really like how the model decides to declare a state of emergency at {1}. The model seems to have learnt to use lists in no particular order. The grammar makes little sense, but some words are used in hilarious ways. 
+I really like how the model decides to declare a state of emergency at {1}. The model seems to have learnt to use lists in no particular order. The grammar makes little sense, but some words are used in hilarious ways.
 
+* More examples coming pretty soon. Lemme get through my exams first.
 
 
 ## Here's a few things that might help you.
 * Keep the learning rate to about 10e-3 during training. That is the default learning rate used in the training script. Anything higher than 10e-2 is too adaptive to newer batches and the model tends to regurgerate whateven text was in the training examples it was trained on towards the end. 
-* Train on a decent machine with a supported CUDA GPU. Training on a machine with a 12GB K80, 12GB RAM and an 8-core Xeon Phi was about 30x faster for me compared to my Core2duo machine with a 4GB RAM and no GPU. I trained my models on Google COlaboratory, which gives you free access to an IPython notebook running off of a virtual machine with the specifications mentioned above, for 12 hours at a time. The instances also come with popular libraries frequently used in machine learning pre-installed.
+* Train on a decent machine with a supported CUDA GPU. Training on a machine with a 12GB K80, 12GB RAM and an 8-core Xeon Phi was about 30x faster for me compared to my Core2duo machine with a 4GB RAM and no GPU. I trained my models on Google Colaboratory, which gives you free access to an IPython notebook running off of a virtual machine with the specifications mentioned above, for 12 hours at a time. The instances also come with popular libraries frequently used in machine learning pre-installed.
 * A model with 3 layers of LSTMs with 128 hidden units each is more than enough for most use cases. Anything more than that is very hard to train in my experience.
 * Use decently sized text files as input. Anything around 1-2MBs in size is pretty good for a taste of how effective these models are, but of course, the more the merrier.
 * The training time increases with increases in
@@ -69,5 +70,12 @@ I really like how the model decides to declare a state of emergency at {1}. The 
 ## TODO
 * Unit tests. UNIT TESTS. **UNIT TESTS**.
 * Comment the code properly. Some blocks are too convoluted to comprehend.
-* Randomize the training examples. This should also help with the 
+* Randomize the training examples. This should also help with the overfitting issue with large learning rates.
+* Add support for other RNN cells like GRU cells.
+* Add live loss plot within the IPython environment for Colab.
 
+
+## Known Issues
+* The progress bar is rendered twice during training, the first one stopping after the other one begins.
+* The progress bar overflows during sampling.
+* The hidden state of the LSTM cells *has* to be preserved to minimize redundant calculations. Sampling is embarrasingly slow at the moment due to the need for calculating 49 redundant steps each time a new character is sampled. That is almost shameful.
